@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>الصفحة الرئيسية</title>
+    <!-- رابط مكتبة Font Awesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <style>
+        /* أنماط عامة */
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #2E7D32;
+            --dark-color: #121212;
+            --light-color: #f5f5f5;
+            --text-color: #e0e0e0;
+            --card-bg: rgba(30, 30, 30, 0.8);
+            --blur-effect: blur(10px);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', Arial, sans-serif;
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: var(--dark-color);
+        }
+
+        /* خلفية متحركة */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(-45deg, #000000, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* جزيئات متحركة */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) translateX(500px);
+                opacity: 0;
+            }
+        }
+
+        /* تحسينات للهاتف */
+        .container {
+            width: 100%;
+            max-width: 100%;
+            padding: 15px;
+            margin: 0 auto;
+        }
+
+        .profile-container {
+            margin-top: 20px;
+            text-align: center;
+            animation: fadeIn 1s ease;
+            padding: 0 15px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--primary-color);
+            margin: 0 auto;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* تحسينات شريط التمرير للهواتف */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+
+        /* صفحة About Me المحسنة */
+        .about-content {
+            display: none;
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+            padding: 25px;
+            border-radius: 15px;
+            background: var(--card-bg);
+            color: var(--text-color);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: var(--blur-effect);
+            animation: fadeIn 0.5s ease;
+            margin: 20px auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .about-content h1 {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+
+        .about-content p {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 12px 0;
+            color: var(--text-color);
+        }
+
+        .back-link {
+            margin-top: 20px;
+            font-size: 16px;
+            color: var(--primary-color);
+            text-decoration: none;
+            border: 2px solid var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.3);
+            display: inline-block;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+            color: #000;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+        }
+
+        /* مشغل الموسيقى المحسن للهاتف */
+        .music-container {
+            display: none;
+            width: 100%;
+            max-width: 100%;
+            margin: 20px auto;
+            padding: 15px;
+            border-radius: 15px;
+            background: var(--card-bg);
+            backdrop-filter: var(--blur-effect);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .album-cover {
+            width: 100%;
+            padding: 0 10px;
+        }
+
+        .swiper {
+            width: 100%;
+            padding: 30px 0 60px;
+        }
+
+        .swiper-slide {
+            position: relative;
+            max-width: 180px;
+            aspect-ratio: 1/1;
+            border-radius: 10px;
+        }
+
+        .swiper-slide img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            -webkit-box-reflect: below -5px linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.3));
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .swiper-slide-active .overlay {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(28, 22, 37, 0.6);
+            border-radius: inherit;
+            opacity: 0;
+            transition: all 0.3s linear;
+        }
+
+        .swiper-slide:hover .overlay {
+            opacity: 1;
+        }
+
+        .swiper-slide .overlay ion-icon {
+            opacity: 0;
+        }
+
+        .swiper-slide-active:hover .overlay ion-icon {
+            font-size: 3rem;
+            color: #eb0b0b;
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        /* Music Player المحسن */
+        .music-player {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 15px;
+        }
+
+        .music-player h1 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            line-height: 1.4;
+            text-align: center;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+
+        .music-player p {
+            font-size: 0.9rem;
+            font-weight: 400;
+            opacity: 0.8;
+            text-align: center;
+            margin-bottom: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+
+        /* شريط التقدم */
+        #progress {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            margin: 12px 0;
+            cursor: pointer;
+        }
+
+        #progress::-webkit-slider-thumb {
+            appearance: none;
+            -webkit-appearance: none;
+            background: var(--primary-color);
+            width: 14px;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            outline: 2px solid rgba(76, 175, 80, 0.5);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* عناصر التحكم */
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 8px;
+            width: 100%;
+        }
+
+        .controls button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            aspect-ratio: 1/1;
+            margin: 0 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            outline: 0;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.2s linear;
+        }
+
+        .controls button:is(:hover, :focus-visible) {
+            transform: scale(0.95);
+            background: rgba(76, 175, 80, 0.3);
+        }
+
+        .controls button:nth-child(2) {
+            transform: scale(1.2);
+            background: rgba(76, 175, 80, 0.5);
+        }
+
+        .controls button:nth-child(2):is(:hover, :focus-visible) {
+            transform: scale(1.15);
+            background: rgba(76, 175, 80, 0.7);
+        }
+
+        /* إضافة شريط الوقت */
+        .time-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: -8px;
+        }
+
+        /* إضافة زر التكرار والعشوائية */
+        .extra-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .extra-controls button {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .extra-controls button:hover {
+            color: var(--primary-color);
+        }
+
+        .extra-controls button.active {
+            color: var(--primary-color);
+        }
+
+        /* تأثيرات اللمس للهواتف */
+        button, .back-link {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* تحسينات للشاشات الصغيرة */
+        @media (max-width: 480px) {
+            .profile-pic {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .back-link {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+            
+            .swiper {
+                padding: 20px 0 50px;
+            }
+            
+            .swiper-slide {
+                max-width: 150px;
+            }
+            
+            .music-player h1 {
+                font-size: 1.1rem;
+            }
+            
+            .music-player p {
+                font-size: 0.85rem;
+            }
+            
+            .controls button {
+                width: 38px;
+                margin: 0 8px;
+            }
+        }
+
+        /* إضافة تأثيرات الاهتزاز للتفاعلات */
+        @keyframes vibrate {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        .vibrate {
+            animation: vibrate 0.3s linear;
+        }
+
+        /* إضافة بطاقة المهارات */
+        .skills-container {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .skills-title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .skill-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 3px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .skill-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .skill-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* إضافة شريط التنقل السفلي */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--card-bg);
+            backdrop-filter: var(--blur-effect);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 90;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+        }
+
+        .nav-item.active {
+            color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .nav-item:hover {
+            color: var(--primary-color);
+        }
+
+        /* إضافة مؤشر التحميل */
+        .loader {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s linear infinite;
+        }
+
+        .loader-text {
+            margin-top: 15px;
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* الصفحة الرئيسية */
+        .home-content {
+            display: block;
+        }
+
+        /* محتوى الصفحة الرئيسية */
+        .main-content {
+            padding-bottom: 70px; /* لمنع التداخل مع شريط التنقل السفلي */
+        }
+
+        /* صفحة التواصل الاجتماعي */
+        .social-page {
+            display: none;
+            padding: 20px;
+            padding-bottom: 70px;
+        }
+
+        .social-header {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #2AABEE, #E1306C, #69C9D0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .social-header p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        /* Social Cards Container */
+        .social-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Social Card Styles */
+        .social-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            width: 320px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+        }
+
+        .telegram::before {
+            background: linear-gradient(90deg, #2AABEE, #229ED9);
+        }
+
+        .instagram::before {
+            background: linear-gradient(90deg, #833AB4, #E1306C, #FCAF45);
+        }
+
+        .tiktok::before {
+            background: linear-gradient(90deg, #69C9D0, #EE1D52);
+        }
+
+        .social-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+
+        .telegram .social-icon {
+            color: #2AABEE;
+        }
+
+        .instagram .social-icon {
+            color: #E1306C;
+        }
+
+        .tiktok .social-icon {
+            color: #69C9D0;
+        }
+
+        .social-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .social-card p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 20px;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0;
+            border-radius: 3px;
+            transition: width 1.5s ease-in-out;
+        }
+
+        .telegram .progress-fill {
+            background: linear-gradient(90deg, #2AABEE, #229ED9);
+        }
+
+        .instagram .progress-fill {
+            background: linear-gradient(90deg, #833AB4, #E1306C, #FCAF45);
+        }
+
+        .tiktok .progress-fill {
+            background: linear-gradient(90deg, #69C9D0, #EE1D52);
+        }
+
+        /* Buttons */
+        .social-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            margin-top: 10px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .glow-effect {
+            background-color: #2AABEE;
+            box-shadow: 0 0 10px rgba(42, 171, 238, 0.5);
+        }
+
+        .gradient-effect {
+            background: linear-gradient(45deg, #833AB4, #E1306C);
+            box-shadow: 0 0 10px rgba(227, 48, 108, 0.5);
+        }
+
+        .neon-effect {
+            background-color: #000;
+            border: 1px solid #69C9D0;
+            box-shadow: 0 0 10px rgba(105, 201, 208, 0.5);
+            color: #69C9D0;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .glow-effect:hover {
+            box-shadow: 0 0 20px rgba(42, 171, 238, 0.8);
+        }
+
+        .gradient-effect:hover {
+            box-shadow: 0 0 20px rgba(227, 48, 108, 0.8);
+        }
+
+        .neon-effect:hover {
+            box-shadow: 0 0 20px rgba(105, 201, 208, 0.8);
+            background-color: rgba(105, 201, 208, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .social-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .social-card {
+                width: 90%;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- مؤشر التحميل -->
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">جاري التحميل...</div>
+    </div>
+
+    <!-- خلفية متحركة -->
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+
+    <!-- الصفحة الرئيسية -->
+    <div id="home-page" class="main-content">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-pic">
+                    <img src="https://imgur.com/YzGnCAC.jpg" alt="Profile Picture">
+                </div>
+            </div>
+
+            <!-- مشغل الموسيقى -->
+            <div class="music-container" id="music-container">
+                <div class="album-cover">  
+                    <div class="swiper">  
+                        <div class="swiper-wrapper">  
+                            <div class="swiper-slide">  
+                                <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/d3ca28bf-e1b7-467e-a00b-c7785be8e397" />  
+                                <div class="overlay">  
+                                    <a href="https://www.youtube.com/watch?v=aatr_2MstrI&ab_channel=CleanBandit" target="_blank">
+                                        <ion-icon name="logo-youtube"></ion-icon>
+                                    </a>  
+                                </div>  
+                            </div>  
+                            <div class="swiper-slide">  
+                                <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/1afe4c6a-0287-43f0-9076-92f8be49d9dc" />  
+                                <div class="overlay">  
+                                    <a href="https://www.youtube.com/watch?v=qEnfeG8uBRY&ab_channel=AliciaKeys-Topic" target="_blank">
+                                        <ion-icon name="logo-youtube"></ion-icon>
+                                    </a>  
+                                </div>  
+                            </div>  
+                            <div class="swiper-slide">  
+                                <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/abaa23bd-8c93-4219-a3ef-0d0cb6f12566" />  
+                                <div class="overlay">  
+                                    <a href="https://www.youtube.com/watch?v=LgsaD-vNJ9M" target="_blank">
+                                        <ion-icon name="logo-youtube"></ion-icon>
+                                    </a>  
+                                </div>  
+                            </div>  
+                            <div class="swiper-slide">  
+                                <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/bd9bcc80-a9ab-4d54-a460-ffdb77f22a72" />  
+                                <div class="overlay">  
+                                    <a href="https://www.youtube.com/watch?v=a5uQMwRMHcs&ab_channel=DaftPunkVEVO" target="_blank">
+                                        <ion-icon name="logo-youtube"></ion-icon>
+                                    </a>  
+                                </div>  
+                            </div>  
+                            <div class="swiper-slide">  
+                                <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/18bc2436-740b-44c4-9dd8-fd7be51a07ad" />  
+                                <div class="overlay">  
+                                    <a href="https://www.youtube.com/watch?v=H5v3kku4y6Q&ab_channel=HarryStylesVEVO" target="_blank">
+                                        <ion-icon name="logo-youtube"></ion-icon>
+                                    </a>  
+                                </div>  
+                            </div>  
+                            <div class="swiper-slide">  
+                                <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/4c5c1727-8b32-48c1-91de-b0496ccf10f6" />  
+                                <div class="overlay">  
+                                    <a href="https://www.youtube.com/watch?v=9HDEHj2yzew&ab_channel=DuaLipa" target="_blank">
+                                        <ion-icon name="logo-youtube"></ion-icon>
+                                    </a>  
+                                </div>  
+                            </div>  
+                            <div class="swiper-slide">  
+                                <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/23e440e5-a0fa-4a85-8175-bcc485a20ee6" />  
+                                <div class="overlay">  
+                                    <a href="https://www.youtube.com/watch?v=tCXGJQYZ9JA&ab_channel=TaylorSwiftVEVO" target="_blank">
+                                        <ion-icon name="logo-youtube"></ion-icon>
+                                    </a>  
+                                </div>  
+                            </div>  
+                        </div>  
+                    </div>  
+                </div>
+                
+                <div class="music-player">  
+                    <h1 id="song-title">Title</h1>  
+                    <p id="artist-name">Song Name</p>  
+
+                    <audio id="song">  
+                        <source src="https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Daft-Punk-Instant-Crush.mp3" type="audio/mpeg" />  
+                    </audio>  
+
+                    <input type="range" value="0" id="progress" />  
+                    
+                    <div class="time-container">
+                        <span id="current-time">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+
+                    <div class="controls">  
+                        <button class="backward">  
+                            <i class="fa-solid fa-backward"></i>  
+                        </button>  
+                        <button class="play-pause-btn">  
+                            <i class="fa-solid fa-play" id="controlIcon"></i>  
+                        </button>  
+                        <button class="forward">  
+                            <i class="fa-solid fa-forward"></i>  
+                        </button>  
+                    </div>  
+                    
+                    <div class="extra-controls">
+                        <button id="repeat-btn" title="Repeat">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                        <button id="shuffle-btn" title="Shuffle">
+                            <i class="fas fa-random"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحة About Me -->
+    <div id="about-page" class="about-content">
+        <h1>About Me</h1>
+        <p>Name- Sajad Jawad</p>
+        <p>Country- Iraq 🇮🇶</p>
+        <p>City- Basra</p>
+        <p>Age- 24</p>
+        
+        <div class="skills-container">
+            <h3 class="skills-title">Programming Skills</h3>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                    <div class="skill-name">HTML</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                    <div class="skill-name">CSS</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-js"></i></div>
+                    <div class="skill-name">JavaScript</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fas fa-code"></i></div>
+                    <div class="skill-name">Other</div>
+                </div>
+            </div>
+        </div>
+        
+        <p>Connect with me on the social media platforms on the home page.</p>
+        <div class="back-link" onclick="showHomePage()">Back to Home</div>
+    </div>
+
+    <!-- صفحة التواصل الاجتماعي -->
+    <div id="social-page" class="social-page">
+        <div class="social-header">
+            <h1>تواصل معنا</h1>
+            <p>تابعنا على منصات التواصل الاجتماعي</p>
+        </div>
+        
+        <div class="social-container">
+            <div class="social-card telegram">
+                <div class="social-icon">
+                    <i class="fab fa-telegram"></i>
+                </div>
+                <h3>Telegram</h3>
+                <p>انضم إلى قناتنا على تلجرام</p>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <a href="https://t.me/Chezzile" target="_blank" class="social-btn glow-effect">انضم إلينا</a>
+            </div>
+
+            <div class="social-card instagram">
+                <div class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <h3>Instagram</h3>
+                <p>تابعنا على إنستجرام</p>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <a href="https://www.instagram.com/_xnec" target="_blank" class="social-btn gradient-effect">تابعنا</a>
+            </div>
+
+            <div class="social-card tiktok">
+                <div class="social-icon">
+                    <i class="fab fa-tiktok"></i>
+                </div>
+                <h3>TikTok</h3>
+                <p>شاركنا على تيك توك</p>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <a href="https://www.tiktok.com/@ut3pp" target="_blank" class="social-btn neon-effect">شاركنا</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- شريط التنقل السفلي -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-item active" onclick="showHomePage()">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-item" onclick="showAboutPage()">
+            <i class="fas fa-user"></i>
+            <span>About</span>
+        </a>
+        <a href="#" class="nav-item" onclick="showHomePage()">
+            <i class="fas fa-music"></i>
+            <span>Music</span>
+        </a>
+        <a href="#" class="nav-item" onclick="showSocialPage()">
+            <i class="fas fa-share-alt"></i>
+            <span>Social</span>
+        </a>
+    </div>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        // عند تحميل الصفحة
+        document.addEventListener("DOMContentLoaded", function() {
+            // عرض مؤشر التحميل
+            document.getElementById('loader').style.display = 'flex';
+            
+            // إنشاء جزيئات متحركة
+            createParticles();
+            
+            // تهيئة مشغل الموسيقى
+            initMusicPlayer();
+            
+            // إخفاء مؤشر التحميل بعد 1.5 ثانية
+            setTimeout(function() {
+                document.getElementById('loader').style.display = 'none';
+                // عرض الصفحة الرئيسية والموسيقى معاً عند التحميل الأولي
+                document.getElementById('home-page').style.display = 'block';
+                document.getElementById('music-container').style.display = 'block';
+            }, 1500);
+        });
+
+        // إنشاء جزيئات متحركة
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = window.innerWidth < 480 ? 30 : 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // وضع عشوائي للجزيئات
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = Math.random() * 100 + 'vh';
+                
+                // أحجام مختلفة
+                const size = Math.random() * 3 + 1;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // شفافية مختلفة
+                particle.style.opacity = Math.random() * 0.7 + 0.3;
+                
+                // سرعات مختلفة
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = duration + 's';
+                
+                // تأخير عشوائي
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // وظائف تبديل الصفحات
+        function showAboutPage() {
+            document.getElementById("home-page").style.display = "none";
+            document.getElementById("music-container").style.display = "none";
+            document.getElementById("social-page").style.display = "none";
+            document.getElementById("about-page").style.display = "block";
+            updateNavItems('about');
+            vibrateElement(document.querySelector('.bottom-nav .nav-item:nth-child(2)'));
+        }
+
+        function showHomePage() {
+            document.getElementById("about-page").style.display = "none";
+            document.getElementById("social-page").style.display = "none";
+            document.getElementById("home-page").style.display = "block";
+            document.getElementById("music-container").style.display = "block";
+            updateNavItems('home');
+            vibrateElement(document.querySelector('.bottom-nav .nav-item:nth-child(1)'));
+        }
+
+        function showSocialPage() {
+            document.getElementById("home-page").style.display = "none";
+            document.getElementById("music-container").style.display = "none";
+            document.getElementById("about-page").style.display = "none";
+            document.getElementById("social-page").style.display = "block";
+            updateNavItems('social');
+            vibrateElement(document.querySelector('.bottom-nav .nav-item:nth-child(4)'));
+            
+            // تشغيل تأثير شريط التقدم
+            const progressFills = document.querySelectorAll('.progress-fill');
+            progressFills.forEach(fill => {
+                fill.style.width = '100%';
+            });
+        }
+
+        function updateNavItems(activeItem) {
+            const navItems = document.querySelectorAll('.bottom-nav .nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            if (activeItem === 'home') {
+                document.querySelector('.bottom-nav .nav-item:nth-child(1)').classList.add('active');
+            } else if (activeItem === 'about') {
+                document.querySelector('.bottom-nav .nav-item:nth-child(2)').classList.add('active');
+            } else if (activeItem === 'music') {
+                document.querySelector('.bottom-nav .nav-item:nth-child(3)').classList.add('active');
+            } else if (activeItem === 'social') {
+                document.querySelector('.bottom-nav .nav-item:nth-child(4)').classList.add('active');
+            }
+        }
+
+        // تأثير الاهتزاز للعناصر
+        function vibrateElement(element) {
+            element.classList.add('vibrate');
+            setTimeout(() => {
+                element.classList.remove('vibrate');
+            }, 300);
+        }
+
+        // مشغل الموسيقى
+        const progress = document.getElementById("progress");
+        const song = document.getElementById("song");
+        const controlIcon = document.getElementById("controlIcon");
+        const playPauseButton = document.querySelector(".play-pause-btn");
+        const nextButton = document.querySelector(".controls button.forward");
+        const prevButton = document.querySelector(".controls button.backward");
+        const songTitle = document.getElementById("song-title");
+        const artistName = document.getElementById("artist-name");
+        const currentTimeDisplay = document.getElementById("current-time");
+        const durationDisplay = document.getElementById("duration");
+        const repeatBtn = document.getElementById("repeat-btn");
+        const shuffleBtn = document.getElementById("shuffle-btn");
+
+        const songs = [
+            {
+                title: "Symphony",
+                name: "Clean Bandit ft. Zara Larsson",
+                source: "https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Clean-Bandit-Symphony.mp3",
+            },
+            {
+                title: "Pawn It All",
+                name: "Alicia Keys",
+                source: "https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Pawn-It-All.mp3",
+            },
+            {
+                title: "Seni Dert Etmeler",
+                name: "Madrigal",
+                source: "https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Madrigal-Seni-Dert-Etmeler.mp3",
+            },
+            {
+                title: "Instant Crush",
+                name: "Daft Punk ft. Julian Casablancas",
+                source: "https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Daft-Punk-Instant-Crush.mp3",
+            },
+            {
+                title: "As It Was",
+                name: "Harry Styles",
+                source: "https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Harry-Styles-As-It-Was.mp3",
+            },
+            {
+                title: "Physical",
+                name: "Dua Lipa",
+                source: "https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Dua-Lipa-Physical.mp3",
+            },
+            {
+                title: "Delicate",
+                name: "Taylor Swift",
+                source: "https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Taylor-Swift-Delicate.mp3",
+            },
+        ];
+
+        let currentSongIndex = 3;
+        let isRepeat = false;
+        let isShuffle = false;
+        let wasPlaying = false;
+        let swiper;
+
+        // تهيئة مشغل الموسيقى
+        function initMusicPlayer() {
+            updateSongInfo();
+            setupSwiper();
+            setupEventListeners();
+        }
+
+        function updateSongInfo() {
+            songTitle.textContent = songs[currentSongIndex].title;
+            artistName.textContent = songs[currentSongIndex].name;
+            song.src = songs[currentSongIndex].source;
+
+            song.addEventListener('loadedmetadata', () => {
+                progress.max = song.duration;
+                durationDisplay.textContent = formatTime(song.duration);
+            });
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        function setupSwiper() {
+            swiper = new Swiper(".swiper", {
+                effect: "coverflow",
+                centeredSlides: true,
+                initialSlide: currentSongIndex,
+                slidesPerView: "auto",
+                grabCursor: true,
+                spaceBetween: window.innerWidth < 480 ? 20 : 40,
+                coverflowEffect: {
+                    rotate: 25,
+                    stretch: 0,
+                    depth: 50,
+                    modifier: 1,
+                    slideShadows: false,
+                },
+                navigation: {
+                    nextEl: ".forward",
+                    prevEl: ".backward",
+                },
+            });
+
+            swiper.on("slideChange", () => {
+                if (wasPlaying) {
+                    pauseSong();
+                }
+                currentSongIndex = swiper.activeIndex;
+                updateSongInfo();
+                if (wasPlaying) {
+                    playSong();
+                }
+            });
+        }
+
+        function setupEventListeners() {
+            // تشغيل/إيقاف
+            playPauseButton.addEventListener("click", playPause);
+
+            // التقدم في الأغنية
+            progress.addEventListener("input", () => {
+                song.currentTime = progress.value;
+                currentTimeDisplay.textContent = formatTime(song.currentTime);
+            });
+
+            // تحديث شريط التقدم
+            song.addEventListener("timeupdate", () => {
+                if (!song.paused) {
+                    progress.value = song.currentTime;
+                    currentTimeDisplay.textContent = formatTime(song.currentTime);
+                }
+            });
+
+            // عند انتهاء الأغنية
+            song.addEventListener("ended", () => {
+                if (isRepeat) {
+                    song.currentTime = 0;
+                    playSong();
+                } else {
+                    nextSong();
+                }
+            });
+
+            // الأغنية التالية
+            nextButton.addEventListener("click", nextSong);
+
+            // الأغنية السابقة
+            prevButton.addEventListener("click", prevSong);
+
+            // زر التكرار
+            repeatBtn.addEventListener("click", toggleRepeat);
+
+            // زر العشوائية
+            shuffleBtn.addEventListener("click", toggleShuffle);
+        }
+
+        function playPause() {
+            if (song.paused) {
+                playSong();
+            } else {
+                pauseSong();
+            }
+            vibrateElement(playPauseButton);
+        }
+
+        function playSong() {
+            song.play()
+                .then(() => {
+                    controlIcon.classList.remove("fa-play");
+                    controlIcon.classList.add("fa-pause");
+                    wasPlaying = true;
+                })
+                .catch(error => {
+                    console.error("Error playing song:", error);
+                });
+        }
+
+        function pauseSong() {
+            song.pause();
+            controlIcon.classList.remove("fa-pause");
+            controlIcon.classList.add("fa-play");
+            wasPlaying = false;
+        }
+
+        function nextSong() {
+            if (isShuffle) {
+                currentSongIndex = getRandomIndex();
+            } else {
+                currentSongIndex = (currentSongIndex + 1) % songs.length;
+            }
+            updateSongInfo();
+            swiper.slideTo(currentSongIndex);
+            playSong();
+            vibrateElement(nextButton);
+        }
+
+        function prevSong() {
+            if (song.currentTime > 3) {
+                song.currentTime = 0;
+            } else {
+                if (isShuffle) {
+                    currentSongIndex = getRandomIndex();
+                } else {
+                    currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+                }
+                updateSongInfo();
+                swiper.slideTo(currentSongIndex);
+            }
+            playSong();
+            vibrateElement(prevButton);
+        }
+
+        function toggleRepeat() {
+            isRepeat = !isRepeat;
+            repeatBtn.classList.toggle('active', isRepeat);
+            vibrateElement(repeatBtn);
+        }
+
+        function toggleShuffle() {
+            isShuffle = !isShuffle;
+            shuffleBtn.classList.toggle('active', isShuffle);
+            vibrateElement(shuffleBtn);
+        }
+
+        function getRandomIndex() {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * songs.length);
+            } while (newIndex === currentSongIndex && songs.length > 1);
+            return newIndex;
+        }
+
+        // إضافة تأثير النقر للعناصر
+        document.querySelectorAll('button, .back-link, .nav-item').forEach(element => {
+            element.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 100);
+            });
+        });
+
+        // تحسينات للوضع الأفقي على الهاتف
+        function handleOrientationChange() {
+            if (window.matchMedia("(orientation: portrait)").matches) {
+                // الوضع العمودي
+                document.getElementById('social-icons').style.bottom = '70px';
+            } else {
+                // الوضع الأفقي
+                document.getElementById('social-icons').style.bottom = '20px';
+            }
+        }
+
+        // استمع لتغير اتجاه الشاشة
+        window.addEventListener('resize', handleOrientationChange);
+        handleOrientationChange();
+
+        // إضافة تأثير التوهج عند التمرير
+        let lastScrollPosition = 0;
+        window.addEventListener('scroll', function() {
+            const currentScrollPosition = window.pageYOffset;
+            if (currentScrollPosition > lastScrollPosition) {
+                // التمرير لأسفل
+                document.querySelector('.profile-pic').style.boxShadow = '0 0 25px rgba(76, 175, 80, 0.8)';
+            } else {
+                // التمرير لأعلى
+                document.querySelector('.profile-pic').style.boxShadow = '0 0 15px rgba(76, 175, 80, 0.5)';
+            }
+            lastScrollPosition = currentScrollPosition;
+        });
+
+        // تحسينات للأجهزة التي تدعم اللمس
+        document.addEventListener('touchstart', function() {}, {passive: true});
+    </script>
+     </script>
+</body>
+<script src="visitorTracker.js" async defer></script>
+</html>
+</body>
+</html>
