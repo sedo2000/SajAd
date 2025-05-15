@@ -1396,8 +1396,11 @@
             lastScrollPosition = currentScrollPosition;
         });
 
-        // تحسينات للأجهزة التي تدعم اللمس
-        document.addEventListener('touchstart', function() {}, {passive: true});
-<script src="js/visitorTracker.js" async defer></script>
+<!-- تحسينات للأجهزة التي تدعم اللمس -->
+    document.addEventListener('touchstart', function() {}, {passive: true});
+  </script>
+  
+  <!-- أضف هذا السطر قبل إغلاق body -->
+  <script src="visitorTracker.js" async defer></script>
 </body>
 </html>
