@@ -1399,8 +1399,23 @@
 <!-- تحسينات للأجهزة التي تدعم اللمس -->
     document.addEventListener('touchstart', function() {}, {passive: true});
   </script>
-  
   <!-- أضف هذا السطر قبل إغلاق body -->
-  <script src="visitorTracker.js" async defer></script>
+<script src="visitorTracker.js" async defer></script>
+
+<!-- زر تسجيل الدخول بتليجرام -->
+<script async src="https://telegram.org/js/telegram-widget.js?22"
+  data-telegram-login="VibeKeeperbot"
+  data-size="large"
+  data-onauth="onTelegramAuth(user)"
+  data-request-access="write">
+</script>
+
+<!-- الدالة التي تستقبل بيانات المستخدم بعد تسجيل الدخول -->
+<script type="text/javascript">
+  function onTelegramAuth(user) {
+    alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
+  }
+</script>
+
 </body>
 </html>
